@@ -105,7 +105,7 @@ namespace ROASApp.Presentaion.ConsoleUI
 
         static void ListForUpdate(IReadOnlyCollection<ROAS> list)
         {
-            Console.WriteLine("Aşağıdaki reklam kanallarından birinin ismini firin");
+            Console.WriteLine("Aşağıdaki reklam kanallarından birinin ismini girin");
             foreach (ROAS t in list)
             {
                 Console.WriteLine(t.ROASInfo());
