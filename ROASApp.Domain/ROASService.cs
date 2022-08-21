@@ -15,12 +15,6 @@ namespace ROASApp.Domain
             roas.satisAdedi = satisAdedi;
 
             liste.Add(roas);
-            //Todo:Dosya sistemine yazma operasyonu gerçekleşecek
-
-            //JSON Convert
-            // JsonSerializerOptions serializerOptions = new JsonSerializerOptions();
-            // serializerOptions.IncludeFields = true;
-            //string json= JsonSerializer.Serialize(liste,serializerOptions);
 
 
             string json = JsonSerializer.Serialize(liste,
@@ -39,9 +33,18 @@ namespace ROASApp.Domain
             foreach (ROAS x in liste)
             {
                 if (x.reklamKanali.ToLower() == reklamKanali.ToLower())
-
+                {
                     liste.Remove(x);
-                break;
+                    Console.WriteLine("Liste silindi. Başka bir işlem yapmak ister misiniz? (y/n)");
+
+                    break;
+
+                }
+                else
+                {
+                   
+
+                }
 
             }
 
@@ -81,17 +84,25 @@ namespace ROASApp.Domain
             return liste;
         }
 
+        public static bool CheckROAS(string kanalAdi)
+        {
+            foreach (var j in liste)
+            {
+                if (j.reklamKanali==kanalAdi)
+                {
+                    return true;                    
+                }
+                
+            }
+            return false;
+        }
+
         public static IReadOnlyCollection<ROAS> GetAllROAS()
         {
             LoadListFromFile();
             return liste.AsReadOnly();
         }
 
-        public static IReadOnlyCollection<ROAS> ShowROAS()
-        {
-            LoadListFromFile();
-            return liste.AsReadOnly();
-        }
         public static IReadOnlyCollection<ROAS> FilterByChannelName(string channelName)
         {
             LoadListFromFile();

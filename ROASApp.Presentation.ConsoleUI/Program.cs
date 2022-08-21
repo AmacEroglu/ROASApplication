@@ -43,6 +43,7 @@ namespace ROASApp.Presentaion.ConsoleUI
                     MenuSelection();
                     break;
             }
+            Again();
         }
         static void Again()
         {
@@ -64,30 +65,32 @@ namespace ROASApp.Presentaion.ConsoleUI
             PrintList(list);
         }
 
-        private static void ShowALLROAS()
-        {
-            var list = ROASService.ShowROAS();
-            ListForUpdate(list);
-        }
-
 
         private static void RemoveROAS()
         {
-            Console.WriteLine("Silmek istediğiniz reklam kanalını seçin: ");
+            ListOfROAS();
+
+            Console.WriteLine("Silmek istediğiniz reklam kanalını seçin: ");           
             string kanalAdi = Console.ReadLine();
-            var data = ROASService.RemoveROAS(kanalAdi);
-            Console.WriteLine("Liste silindi. Başka bir işlem yapmak ister misiniz? (y/n)");
-            string answer = Console.ReadLine().ToLower();
-            if (answer == "y")
-                Menu();
-            if (answer == "n")
-                Environment.Exit(0);
+            bool varmi = ROASService.CheckROAS(kanalAdi);
+            if (varmi)
+            {
+                var data = ROASService.RemoveROAS(kanalAdi);
+
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Yanlış bir değer girdiniz");
+                RemoveROAS();
+            }
 
         }
 
         private static void UpdateROAS()
         {
-            ShowALLROAS();
+            ListOfROAS();
+
             Console.WriteLine("Lütfen güncellemek istediğiniz kanalın ismini girin: ");
             string kanalAdi = Console.ReadLine();
             Console.Clear();
@@ -103,15 +106,7 @@ namespace ROASApp.Presentaion.ConsoleUI
 
         }
 
-        static void ListForUpdate(IReadOnlyCollection<ROAS> list)
-        {
-            Console.WriteLine("Aşağıdaki reklam kanallarından birinin ismini girin");
-            foreach (ROAS t in list)
-            {
-                Console.WriteLine(t.ROASInfo());
-                Console.WriteLine("--------------------------------------");
-            }
-        }
+
         static void PrintList(IReadOnlyCollection<ROAS> list)
         {
              Console.WriteLine("----------- Liste Başlangıcı ----------"); 
@@ -121,7 +116,7 @@ namespace ROASApp.Presentaion.ConsoleUI
                 Console.WriteLine("--------------------------------------");
             }
             Console.WriteLine("----------- Liste Sonu ----------");
-            Again();
+            
         }
         private static void NewROAS()
         {
@@ -138,7 +133,7 @@ namespace ROASApp.Presentaion.ConsoleUI
            var data= ROASService.SaveROAS(kanalAdi, maliyet, birimFiyat, adet);
 
             Console.WriteLine($"Hesaplanan ROAS Değeri : %{data.ROASGetirisi()}");
-            Again();
+            
         }
     }
 }
