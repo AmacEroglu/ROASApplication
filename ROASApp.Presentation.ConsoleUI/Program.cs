@@ -99,9 +99,10 @@ namespace ROASApp.Presentaion.ConsoleUI
             string answer = Console.ReadLine().ToLower();
             if (answer == "y")
                 Console.Clear();
-                ListOfROAS();
+            ListOfROAS();
             if (answer == "n")
                 Environment.Exit(0);
+
 
 
         }

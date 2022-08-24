@@ -13,6 +13,7 @@ namespace ROASApp.Domain
             roas.reklamMaliyeti = reklamMaliyeti;
             roas.birimFiyat = birimFiyat;
             roas.satisAdedi = satisAdedi;
+           
 
             liste.Add(roas);
 
@@ -55,28 +56,26 @@ namespace ROASApp.Domain
             return liste;
         }
 
-        public static List<ROAS> UpdateROAS(string reklamKanali)
+        public static List<ROAS> UpdateROAS(string kanalAdi)
 
         {
             LoadListFromFile();
 
             foreach (ROAS z in liste)
             {
-                if (z.reklamKanali.ToLower() == reklamKanali.ToLower())
-                {
-                    Console.WriteLine("Lütfen yeni reklam kanalını girin: ");
-                    z.reklamKanali = Console.ReadLine();
-                    Console.WriteLine("Lütfen yeni reklam maliyeti girin: ");
-                    z.reklamMaliyeti = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("Lütfen yeni birim fiyat girin: ");
-                    z.birimFiyat = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("Lütfen yeni reklam kanalını girin: ");
-                    z.satisAdedi = Convert.ToInt32(Console.ReadLine());
 
-                    break;
-                }
+                Console.WriteLine("Lütfen yeni reklam kanalını girin: ");
+                z.reklamKanali = Console.ReadLine();
+                Console.WriteLine("Lütfen yeni reklam maliyeti girin: ");
+                z.reklamMaliyeti = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Lütfen yeni birim fiyat girin: ");
+                z.birimFiyat = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Lütfen yeni reklam kanalını girin: ");
+                z.satisAdedi = Convert.ToInt32(Console.ReadLine());
 
+                break;
             }
+
             string json = JsonSerializer.Serialize(liste,
             new JsonSerializerOptions { IncludeFields = true });
 
@@ -120,7 +119,6 @@ namespace ROASApp.Domain
             liste = JsonSerializer.Deserialize<List<ROAS>>(json,
                 new JsonSerializerOptions { IncludeFields = true });
         }
-        //Todo:ROAS Silme işlevselliğini projeye ekleyin!
-        //Todo:ROAS Güncelleme işlevselliğini projeye ekleyin!
+
     }
 }
