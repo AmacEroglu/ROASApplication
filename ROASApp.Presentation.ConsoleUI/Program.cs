@@ -91,10 +91,10 @@ namespace ROASApp.Presentaion.ConsoleUI
         {
             ListOfROAS();
 
-            Console.WriteLine("Lütfen güncellemek istediğiniz kanalın ismini girin: ");
-            string kanalAdi = Console.ReadLine();
+            Console.WriteLine("Lütfen güncellemek istediğiniz index no'yu girin: ");
+            int indexNo = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
-            var data = ROASService.UpdateROAS(kanalAdi);
+            var data = ROASService.UpdateROAS(indexNo-1);
             Console.WriteLine("Reklam kanalı güncellendi. Listeye gitmek ister misiniz? (y/n)");
             string answer = Console.ReadLine().ToLower();
             if (answer == "y")

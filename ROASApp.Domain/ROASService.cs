@@ -56,25 +56,22 @@ namespace ROASApp.Domain
             return liste;
         }
 
-        public static List<ROAS> UpdateROAS(string kanalAdi)
+        public static List<ROAS> UpdateROAS(int indexNo)
 
         {
             LoadListFromFile();
-
-            foreach (ROAS z in liste)
-            {
-
+            
                 Console.WriteLine("Lütfen yeni reklam kanalını girin: ");
-                z.reklamKanali = Console.ReadLine();
+            liste[indexNo].reklamKanali = Console.ReadLine();
                 Console.WriteLine("Lütfen yeni reklam maliyeti girin: ");
-                z.reklamMaliyeti = Convert.ToDouble(Console.ReadLine());
+            liste[indexNo].reklamMaliyeti = Convert.ToDouble(Console.ReadLine());
                 Console.WriteLine("Lütfen yeni birim fiyat girin: ");
-                z.birimFiyat = Convert.ToDouble(Console.ReadLine());
+            liste[indexNo].birimFiyat = Convert.ToDouble(Console.ReadLine());
                 Console.WriteLine("Lütfen yeni reklam kanalını girin: ");
-                z.satisAdedi = Convert.ToInt32(Console.ReadLine());
+            liste[indexNo].satisAdedi = Convert.ToInt32(Console.ReadLine());
 
-                break;
-            }
+               
+            
 
             string json = JsonSerializer.Serialize(liste,
             new JsonSerializerOptions { IncludeFields = true });
